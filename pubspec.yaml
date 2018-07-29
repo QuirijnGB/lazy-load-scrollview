@@ -1,0 +1,15 @@
+name: lazy_load_scrollview
+description: A wrapper for a ScrollView that will enable lazy loading
+version: 0.0.1
+author: Quirijn Groot Bluemink <quirijn.grootbluemink@gmail.com>
+homepage: https://github.com/QuirijnGB/lazy-load-scrollview
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
