@@ -31,17 +31,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    loadMore();
+    _loadMore();
     super.initState();
   }
 
-  void loadMore() {
-    print("Loading more $currentLength");
-    for (var i = currentLength; i <= currentLength + increment; i++) {
-      data.add(i);
-    }
-    currentLength = data.length;
-    setState(() {});
+  void _loadMore() {
+    setState(() {
+      for (var i = currentLength; i <= currentLength + increment; i++) {
+        data.add(i);
+      }
+      currentLength = data.length;
+    });
   }
 
   @override
@@ -51,10 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
       ),
       body: LazyLoadScrollView(
-        endOfPageListener: () {
-          print("end of page");
-          loadMore();
-        },
+        endOfPageListener: () => _loadMore(),
         child: ListView.builder(
           itemCount: data.length,
           itemBuilder: (context, position) {
@@ -94,6 +91,8 @@ class DemoItem extends StatelessWidget {
                 Text("Item $position"),
               ],
             ),
+            Text(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed vulputate orci. Proin id scelerisque velit. Fusce at ligula ligula. Donec fringilla sapien odio, et faucibus tortor finibus sed. Aenean rutrum ipsum in sagittis auctor. Pellentesque mattis luctus consequat. Sed eget sapien ut nibh rhoncus cursus. Donec eget nisl aliquam, ornare sapien sit amet, lacinia quam."),
           ],
         ),
       ),
