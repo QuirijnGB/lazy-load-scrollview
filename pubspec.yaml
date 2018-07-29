@@ -4,7 +4,11 @@ version: 0.0.1
 author: Quirijn Groot Bluemink <quirijn.grootbluemink@gmail.com>
 homepage: https://github.com/QuirijnGB/lazy-load-scrollview
 
+environment:
+  sdk: ">=1.19.0 <2.0.0"
+  
 dependencies:
+  sdk: '>=2.0.0-dev.1.2 <3.0.0'
   flutter:
     sdk: flutter
 
