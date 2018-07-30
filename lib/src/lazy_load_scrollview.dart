@@ -4,13 +4,19 @@ import 'package:flutter/widgets.dart';
 
 enum LoadingStatus { LOADING, STABLE }
 
-typedef void EndOfPageListener();
+/// Signature for EndOfPageListeners
+typedef void EndOfPageListenerCallback();
 
+/// A widget that wraps a [ScrollView] and will trigger [onEndOfPage] when it
+/// reaches the bottom of the list
 class LazyLoadScrollView extends StatefulWidget {
+  /// The [ScrollView] that this widget watches for changes on
   final ScrollView child;
 
-  final EndOfPageListener endOfPageListener;
+  /// Called when the [child] reaches the end of the list
+  final EndOfPageListenerCallback onEndOfPage;
 
+  /// The offset to take into account when triggering [onEndOfPage] in pixels
   final int scrollOffset;
 
   @override
@@ -19,9 +25,9 @@ class LazyLoadScrollView extends StatefulWidget {
   LazyLoadScrollView({
     Key key,
     @required this.child,
-    @required this.endOfPageListener,
+    @required this.onEndOfPage,
     this.scrollOffset = 100,
-  })  : assert(endOfPageListener != null),
+  })  : assert(onEndOfPage != null),
         assert(child != null),
         super(key: key);
 }
@@ -50,7 +56,7 @@ class LazyLoadScrollViewState extends State<LazyLoadScrollView> {
               widget.scrollOffset) {
         if (loadMoreStatus != null && loadMoreStatus == LoadingStatus.STABLE) {
           loadMoreStatus = LoadingStatus.LOADING;
-          widget.endOfPageListener();
+          widget.onEndOfPage();
         }
       }
       return true;
@@ -59,7 +65,7 @@ class LazyLoadScrollViewState extends State<LazyLoadScrollView> {
       if (notification.overscroll > 0) {
         if (loadMoreStatus != null && loadMoreStatus == LoadingStatus.STABLE) {
           loadMoreStatus = LoadingStatus.LOADING;
-          widget.endOfPageListener();
+          widget.onEndOfPage();
         }
       }
       return true;

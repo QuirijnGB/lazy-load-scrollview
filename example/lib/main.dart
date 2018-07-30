@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
       ),
       body: LazyLoadScrollView(
-        endOfPageListener: () => _loadMore(),
+        onEndOfPage: () => _loadMore(),
         child: ListView.builder(
           itemCount: data.length,
           itemBuilder: (context, position) {

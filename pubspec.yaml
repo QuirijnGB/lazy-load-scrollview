@@ -1,19 +1,16 @@
 name: lazy_load_scrollview
-description: A wrapper for a ScrollView that will enable lazy loading
-version: 0.0.1
+description: A wrapper for a ScrollView that will trigger a callback when the bottom of the page is reached
+version: 0.0.2
 author: Quirijn Groot Bluemink <quirijn.grootbluemink@gmail.com>
 homepage: https://github.com/QuirijnGB/lazy-load-scrollview
 
 environment:
-  sdk: ">=1.19.0 <2.0.0"
-  
-dependencies:
   sdk: '>=2.0.0-dev.1.2 <3.0.0'
+
+dependencies:
   flutter:
     sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-flutter:
