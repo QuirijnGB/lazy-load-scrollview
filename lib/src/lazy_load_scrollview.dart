@@ -19,6 +19,9 @@ class LazyLoadScrollView extends StatefulWidget {
   /// The offset to take into account when triggering [onEndOfPage] in pixels
   final int scrollOffset;
 
+  /// Used to determine if loading of new data has finished. You should use set this if you aren't using a FutureBuilder or StreamBuilder
+  final bool isLoading;
+
   @override
   State<StatefulWidget> createState() => LazyLoadScrollViewState();
 
@@ -26,6 +29,7 @@ class LazyLoadScrollView extends StatefulWidget {
     Key key,
     @required this.child,
     @required this.onEndOfPage,
+    this.isLoading = false,
     this.scrollOffset = 100,
   })  : assert(onEndOfPage != null),
         assert(child != null),
@@ -38,7 +42,9 @@ class LazyLoadScrollViewState extends State<LazyLoadScrollView> {
   @override
   void didUpdateWidget(LazyLoadScrollView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    loadMoreStatus = LoadingStatus.STABLE;
+    if (!widget.isLoading) {
+      loadMoreStatus = LoadingStatus.STABLE;
+    }
   }
 
   @override
