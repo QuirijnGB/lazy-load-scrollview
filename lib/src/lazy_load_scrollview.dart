@@ -11,7 +11,7 @@ typedef void EndOfPageListenerCallback();
 /// reaches the bottom of the list
 class LazyLoadScrollView extends StatefulWidget {
   /// The [ScrollView] that this widget watches for changes on
-  final ScrollView child;
+  final Widget child;
 
   /// Called when the [child] reaches the end of the list
   final EndOfPageListenerCallback onEndOfPage;
