@@ -1,7 +1,6 @@
 name: lazy_load_scrollview
 description: A wrapper for a ScrollView that will trigger a callback when the bottom of the page is reached
-version: 1.0.1
-author: Quirijn Groot Bluemink <quirijn.grootbluemink@gmail.com>
+version: 1.1.0
 homepage: https://github.com/QuirijnGB/lazy-load-scrollview
 
 environment:

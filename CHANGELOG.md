@@ -1,3 +1,9 @@
+## [1.1.0] - 28-04-2020
+
+* Updates child to accept Widget. Allowing the use for example, a RefreshIndicator
+
+Credit: [Michal Bartnicki](https://github.com/mbartn)
+
 ## [1.0.1] - 8-07-2019
 
 * Updates dependencies
