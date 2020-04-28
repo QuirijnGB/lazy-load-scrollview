@@ -14,7 +14,7 @@ dependencies:
 
 
 In your Dart code, import `package:lazy_load_scrollview/lazy_load_scrollview.dart`
-Then you can wrap your `ListView` or `GridView` with the `LazyLoadScrollView`.
+Then you can wrap your `ListView`, `GridView`, `RefreshIndicator` etc with the `LazyLoadScrollView`.
 Make sure you add an `endOfPageListener` which will receive the call when the bottom of the list has been reached.
 
 ```dart

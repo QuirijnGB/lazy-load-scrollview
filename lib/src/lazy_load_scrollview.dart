@@ -7,10 +7,10 @@ enum LoadingStatus { LOADING, STABLE }
 /// Signature for EndOfPageListeners
 typedef void EndOfPageListenerCallback();
 
-/// A widget that wraps a [ScrollView] and will trigger [onEndOfPage] when it
+/// A widget that wraps a [Widget] and will trigger [onEndOfPage] when it
 /// reaches the bottom of the list
 class LazyLoadScrollView extends StatefulWidget {
-  /// The [ScrollView] that this widget watches for changes on
+  /// The [Widget] that this widget watches for changes on
   final Widget child;
 
   /// Called when the [child] reaches the end of the list
