@@ -22,6 +22,9 @@ class LazyLoadScrollView extends StatefulWidget {
   /// Used to determine if loading of new data has finished. You should use set this if you aren't using a FutureBuilder or StreamBuilder
   final bool isLoading;
 
+  /// Prevented update nested listview with other axis direction
+  final Axis scrollDirection;
+
   @override
   State<StatefulWidget> createState() => LazyLoadScrollViewState();
 
@@ -29,6 +32,7 @@ class LazyLoadScrollView extends StatefulWidget {
     Key key,
     @required this.child,
     @required this.onEndOfPage,
+    this.scrollDirection = Axis.vertical,
     this.isLoading = false,
     this.scrollOffset = 100,
   })  : assert(onEndOfPage != null),
@@ -49,33 +53,38 @@ class LazyLoadScrollViewState extends State<LazyLoadScrollView> {
 
   @override
   Widget build(BuildContext context) {
-    return NotificationListener(
+    return NotificationListener<ScrollNotification>(
       child: widget.child,
       onNotification: (notification) => _onNotification(notification, context),
     );
   }
 
-  bool _onNotification(Notification notification, BuildContext context) {
-    if (notification is ScrollUpdateNotification) {
-      if (notification.metrics.maxScrollExtent > notification.metrics.pixels &&
-          notification.metrics.maxScrollExtent - notification.metrics.pixels <=
-              widget.scrollOffset) {
-        if (loadMoreStatus != null && loadMoreStatus == LoadingStatus.STABLE) {
-          loadMoreStatus = LoadingStatus.LOADING;
-          widget.onEndOfPage();
+  bool _onNotification(ScrollNotification notification, BuildContext context) {
+
+    if(widget.scrollDirection == notification.metrics.axis){
+      if (notification is ScrollUpdateNotification) {
+        if (notification.metrics.maxScrollExtent > notification.metrics.pixels &&
+            notification.metrics.maxScrollExtent - notification.metrics.pixels <=
+                widget.scrollOffset) {
+          _loadMore();
         }
+        return true;
       }
-      return true;
-    }
-    if (notification is OverscrollNotification) {
-      if (notification.overscroll > 0) {
-        if (loadMoreStatus != null && loadMoreStatus == LoadingStatus.STABLE) {
-          loadMoreStatus = LoadingStatus.LOADING;
-          widget.onEndOfPage();
+
+      if (notification is OverscrollNotification) {
+        if (notification.overscroll > 0) {
+          _loadMore();
         }
-      }
-      return true;
+        return true;
+      }      
     }
     return false;
+  }
+
+  void _loadMore(){
+    if (loadMoreStatus != null && loadMoreStatus == LoadingStatus.STABLE) {
+      loadMoreStatus = LoadingStatus.LOADING;
+      widget.onEndOfPage();
+    }
   }
 }
