@@ -1,3 +1,7 @@
+## [1.1.1] - 10-09-2020
+
+* Fixes [issue](https://github.com/QuirijnGB/lazy-load-scrollview/issues/7) where onEndOfPage() triggers for every scrollview in the widget tree
+
 ## [1.1.0] - 28-04-2020
 
 * Updates child to accept Widget. Allowing the use for example, a RefreshIndicator
