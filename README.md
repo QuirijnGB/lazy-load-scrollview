@@ -28,7 +28,7 @@ Widget build(BuildContext context) {
         title: Text(widget.title),
       ),
       body: LazyLoadScrollView(
-        endOfPageListener: () => loadMore(),
+        onEndOfPage: () => loadMore(),
         child: ListView.builder(
           itemCount: data.length,
           itemBuilder: (context, position) {
