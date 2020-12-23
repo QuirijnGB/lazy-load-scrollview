@@ -47,7 +47,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // Add in an artificial delay
     await new Future.delayed(const Duration(seconds: 2));
 
-    verticalData.addAll(List.generate(increment, (index) => verticalData.length + index));
+    verticalData.addAll(
+        List.generate(increment, (index) => verticalData.length + index));
 
     setState(() {
       isLoadingVertical = false;
@@ -62,7 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // Add in an artificial delay
     await new Future.delayed(const Duration(seconds: 2));
 
-    horizontalData.addAll(List.generate(increment, (index) => horizontalData.length + index));
+    horizontalData.addAll(
+        List.generate(increment, (index) => horizontalData.length + index));
 
     setState(() {
       isLoadingHorizontal = false;
@@ -83,28 +85,30 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Nested horizontal ListView', textAlign: TextAlign.center,),
+                child: Text(
+                  'Nested horizontal ListView',
+                  textAlign: TextAlign.center,
+                ),
               ),
               Container(
-                height: 180,
-                child: LazyLoadScrollView(
-                  isLoading: isLoadingHorizontal,
-                  scrollDirection: Axis.horizontal,
-                  onEndOfPage: () => _loadMoreHorizontal(),
-                  child: Scrollbar(
-                    child: ListView.builder(
-                      itemCount: horizontalData.length,
+                  height: 180,
+                  child: LazyLoadScrollView(
+                      isLoading: isLoadingHorizontal,
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, position) {
-                        return DemoItem(position);
-                      }
-                    )
-                  )
-                )
-              ),
+                      onEndOfPage: () => _loadMoreHorizontal(),
+                      child: Scrollbar(
+                          child: ListView.builder(
+                              itemCount: horizontalData.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, position) {
+                                return DemoItem(position);
+                              })))),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Vertical ListView', textAlign: TextAlign.center,),
+                child: Text(
+                  'Vertical ListView',
+                  textAlign: TextAlign.center,
+                ),
               ),
               ListView.builder(
                 shrinkWrap: true,
