@@ -1,3 +1,7 @@
+## [1.3.0] - 7-03-2021
+
+* Update for Null-Safety
+
 ## [1.2.0] - 23-12-2020
 
 * Updates the example project

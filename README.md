@@ -9,7 +9,7 @@ Add `lazy_load_scrollview` dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  lazy_load_scrollview: 1.2.0
+  lazy_load_scrollview: 1.3.0
 ```
 
 
