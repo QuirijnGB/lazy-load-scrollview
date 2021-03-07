@@ -29,15 +29,13 @@ class LazyLoadScrollView extends StatefulWidget {
   State<StatefulWidget> createState() => LazyLoadScrollViewState();
 
   LazyLoadScrollView({
-    Key key,
-    @required this.child,
-    @required this.onEndOfPage,
+    Key? key,
+    required this.child,
+    required this.onEndOfPage,
     this.scrollDirection = Axis.vertical,
     this.isLoading = false,
     this.scrollOffset = 100,
-  })  : assert(onEndOfPage != null),
-        assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 }
 
 class LazyLoadScrollViewState extends State<LazyLoadScrollView> {
@@ -60,11 +58,12 @@ class LazyLoadScrollViewState extends State<LazyLoadScrollView> {
   }
 
   bool _onNotification(ScrollNotification notification, BuildContext context) {
-
-    if(widget.scrollDirection == notification.metrics.axis){
+    if (widget.scrollDirection == notification.metrics.axis) {
       if (notification is ScrollUpdateNotification) {
-        if (notification.metrics.maxScrollExtent > notification.metrics.pixels &&
-            notification.metrics.maxScrollExtent - notification.metrics.pixels <=
+        if (notification.metrics.maxScrollExtent >
+                notification.metrics.pixels &&
+            notification.metrics.maxScrollExtent -
+                    notification.metrics.pixels <=
                 widget.scrollOffset) {
           _loadMore();
         }
@@ -76,13 +75,13 @@ class LazyLoadScrollViewState extends State<LazyLoadScrollView> {
           _loadMore();
         }
         return true;
-      }      
+      }
     }
     return false;
   }
 
-  void _loadMore(){
-    if (loadMoreStatus != null && loadMoreStatus == LoadingStatus.STABLE) {
+  void _loadMore() {
+    if (loadMoreStatus == LoadingStatus.STABLE) {
       loadMoreStatus = LoadingStatus.LOADING;
       widget.onEndOfPage();
     }

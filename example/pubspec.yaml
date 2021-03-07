@@ -1,6 +1,9 @@
 name: example
 description: An example project for the lazy loader
 
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
 dependencies:
   flutter:
     sdk: flutter
