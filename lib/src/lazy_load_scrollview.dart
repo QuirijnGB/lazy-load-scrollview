@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 // TODO: How does this know it's reached the end of the list?
-/// A function signature for a builder that recieves loading widgets to be
+/// A function signature for a builder that receives loading widgets to be
 /// inserted into a ListView when further data is being fetched.
 typedef LazyLoadBuilder = Widget Function(
   BuildContext context,
