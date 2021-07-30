@@ -18,10 +18,11 @@ class LazyLoadScrollView extends StatefulWidget {
   /// carries the context of the child and a loading widget to be inserted into
   /// the ListViews.
   ///
-  /// Note, the direct child of this widget should be the [ListView]. If it is
-  /// not and the [ListView] is further down the tree then it's likely that this
-  /// will Builder will fail to recognize scroll events unless [ignoreDepth] is
-  /// set to true.
+  /// The [Scrollable] should be a direct child of this builder for us to listen
+  /// to bubbling events. If it is not the direct child, you must further specify
+  /// a predicate in order to find it in the descendents or, if there are no other
+  /// scrollables, set [ignoreDepth] to true. If you'd like to avoid a
+  /// predicate, you may also provide an optional [ScrollController].
   final LazyLoadBuilder builder;
 
   /// The offset from the end at which the [onLoadBefore] or [onLoadAfter] will
@@ -98,8 +99,11 @@ class _LazyListBuilderState extends State<LazyLoadScrollView> {
       setState(() => isLoadingBefore = true);
 
       if (mounted) {
-        await widget.onLoadBefore?.call().timeout(widget.timeout);
-        setState(() => isLoadingBefore = false);
+        await widget.onLoadBefore?.call().timeout(widget.timeout).whenComplete(
+          () {
+            setState(() => isLoadingBefore = false);
+          },
+        );
       }
 
       timer = Timer(widget.debounceDuration, () {});
@@ -115,9 +119,11 @@ class _LazyListBuilderState extends State<LazyLoadScrollView> {
       setState(() => isLoadingAfter = true);
 
       if (mounted) {
-        // TODO: Will these need completers to correctly handle errors?
-        await widget.onLoadAfter?.call().timeout(widget.timeout);
-        setState(() => isLoadingAfter = false);
+        await widget.onLoadAfter?.call().timeout(widget.timeout).whenComplete(
+          () {
+            setState(() => isLoadingAfter = false);
+          },
+        );
       }
 
       timer = Timer(widget.debounceDuration, () {});
