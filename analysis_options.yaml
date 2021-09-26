@@ -1,0 +1,21 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+
+linter:
+  rules:
+    # - public_member_api_docs
+    - require_trailing_commas
+    - parameter_assignments
+    - only_throw_errors
+    - always_use_package_imports
+    - avoid_dynamic_calls
+    - prefer_void_to_null
+    - always_declare_return_types
+    - avoid_classes_with_only_static_members
+    - unnecessary_lambdas
+    - unnecessary_const
+    - avoid_void_async
